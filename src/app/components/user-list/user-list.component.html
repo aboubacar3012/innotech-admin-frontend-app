@@ -1,0 +1,30 @@
+<div class="card my-3 flex justify-content-around">
+  <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input placeholder="Rechercher par matricule" class="w-full" type="text" pInputText [(ngModel)]="value" />
+  </span>
+  <p-button label="Ajouter un étudiant" icon="pi pi-plus" ></p-button>
+</div>
+
+<div class="card my-3">
+  <p-table [value]="products" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Matricule</th>
+              <th>Photo</th>
+              <th>Nom complet</th>
+              <th>Date de naissance</th>
+              <th></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+          <tr>
+              <td>{{product.code}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.category}}</td>
+              <td>{{product.quantity}}</td>
+              <td><p-button icon="pi pi-eye" styleClass="p-button-warning"></p-button></td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
