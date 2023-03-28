@@ -1,0 +1,11 @@
+.tab{
+  display: flex;
+  align-items:center ;
+  font-size: large;
+  cursor: pointer;
+  padding-left: 15px;
+}
+
+.tab:hover{
+  background-color: #46546c;
+}
