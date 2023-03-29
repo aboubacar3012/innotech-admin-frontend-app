@@ -5,36 +5,48 @@
     <h2 class="p-3" style="background-color: #303c54;">Logo</h2>
     <div class="tab ">
       <i class="pi pi-user mr-3" ></i>
-      <p>Dashboard</p>
+      <p>
+        <a routerLink="dashboard">Dashboard</a>
+      </p>
     </div>
     <h3 class="p-3">Gestions</h3>
     <div class="tab ">
       <i class="pi pi-users mr-3" ></i>
-      <p>Etudiants</p>
+      <p>
+        <a routerLink="students">Etudiants</a>
+      </p>
     </div>
     <div class="tab ">
       <i class="pi pi-users mr-3" ></i>
-      <p>Professeurs</p>
+      <p>
+        <a routerLink="teachers">Professeurs</a>
+      </p>
     </div>
     <div class="tab ">
       <i class="pi pi-book mr-3" ></i>
-      <p>Programmes</p>
+      <p>
+        <a routerLink="stacks">Programmes</a>
+      </p>
     </div>
     <div class="tab ">
       <i class="pi pi-bars mr-3" ></i>
-      <p>Groupes</p>
+      <p>
+        <a routerLink="groupes">Groupes</a>
+      </p>
     </div>
     <div class="tab ">
       <i class="pi pi-home mr-3" ></i>
-      <p>Campus</p>
+      <p>
+        <a routerLink="campus">Campus</a>
+      </p>
     </div>
     </div>
     <div class="col-9">
 
-        <p-card header="Etudiants" subheader="Gestionnaires d'etudiants">
-          <app-user-list></app-user-list>
-        </p-card>
-
+        <!-- <app-users></app-users> -->
+        <!-- <app-stacks></app-stacks> -->
+        <!-- <app-campus></app-campus> -->
+        <router-outlet></router-outlet>
     </div>
 </div>
 

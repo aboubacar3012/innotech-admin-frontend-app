@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  selector: 'app-student-list',
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.scss'],
 })
-export class UserListComponent {
+export class StudentListComponent {
   value!: string;
   products: any[] = [
     {
@@ -33,12 +33,4 @@ export class UserListComponent {
       rating: 5,
     },
   ];
-
-  // constructor(private productService: ProductService) {}
-
-  ngOnInit() {
-    // this.productService.getProductsMini().then((data) => {
-    //   this.products = data;
-    // });
-  }
 }
