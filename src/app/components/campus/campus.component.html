@@ -4,25 +4,29 @@
       <i class="pi pi-search"></i>
       <input placeholder="Rechercher par nom" class="w-full" type="text" pInputText [(ngModel)]="value" />
     </span>
-    <p-button (click)="showDialog()" label="Ajouter un campus" icon="pi pi-plus" ></p-button>
+    <p-button (click)="showAddDialog()" label="Ajouter un campus" icon="pi pi-plus" ></p-button>
   </div>
 
   <div class="card my-3">
-    <p-table [value]="products" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+    <p-table [value]="campuses" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th>Nom du campus</th>
-                <th>Duree</th>
+                <th>Ville</th>
+                <th>Adresse</th>
+                <th>Ouvert</th>
                 <th></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-campus>
             <tr>
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
+                <td>{{campus.name}}</td>
+                <td>{{campus.city}}</td>
+                <td>{{campus.address}}</td>
+                <td><p-inputSwitch [disabled]="true" [(ngModel)]="campus.isOpen"></p-inputSwitch></td>
                 <td>
-                  <p-button icon="pi pi-pencil" styleClass="p-button-success mx-1" (click)="showDialog()"></p-button>
-                  <p-button icon="pi pi-trash" styleClass="p-button-danger mx-1" (click)="confirm1()"></p-button>
+                  <p-button icon="pi pi-pencil" styleClass="p-button-success mx-1" (click)="showEditDialog(campus.id)"></p-button>
+                  <p-button icon="pi pi-trash" styleClass="p-button-danger mx-1" (click)="deleteById(campus.id)"></p-button>
                 </td>
             </tr>
         </ng-template>
@@ -35,24 +39,65 @@
   </div>
 
 
-  <p-dialog header="Header" [blockScroll]="true" [(visible)]="visible" position="center" [closable]="false" >
+  <!-- Modal pour modifier un programme -->
+  <p-dialog header="Header" [blockScroll]="true" [(visible)]="editModalVisible" position="center" [closable]="false" *ngIf="selectedCampus">
     <ng-template pTemplate="header">
         <span class="text-xl font-bold">Modification du campus</span>
     </ng-template>
     <div class="edit-stack">
       <table>
-        <tr>
-          <td><label class="mx-2 block" for="name">Nom:</label></td>
-          <td><input class="mx-2" type="text" id="name" pInputText /></td>
+            <tr>
+          <td><label class="mx-2 block" for="name">Nom du campus</label></td>
+          <td><input [value]="selectedCampus.name"  class="mx-2" type="text" id="name" pInputText /></td>
         </tr>
         <tr>
-          <td><label class="mx-2 block" for="duration">Duree:</label></td>
-          <td><input class="mx-2" type="number" id="duration" pInputText /></td>
+          <td><label class="mx-2 block" for="duration">Ville</label></td>
+          <td><input [value]="selectedCampus.city" class="mx-2" type="text" id="ville" pInputText /></td>
+        </tr>
+        <tr>
+          <td><label class="mx-2 block" for="duration">Adresse</label></td>
+          <td><input [value]="selectedCampus.address" class="mx-2" type="text" id="address" pInputText /></td>
+        </tr>
+        <tr>
+          <td><label class="mx-2 block" for="duration">Ouverture</label></td>
+          <td><p-inputSwitch [(ngModel)]="selectedCampus.isOpen"></p-inputSwitch></td>
         </tr>
       </table>
     </div>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-save" (click)="visible = false" label="Enregistrer" styleClass="p-button-success"></p-button>
-        <p-button icon="pi pi-history" (click)="visible = false" label="Annuler" styleClass="p-button-danger"></p-button>
+        <p-button icon="pi pi-save" (click)="editModalVisible = false" label="Enregistrer" styleClass="p-button-success"></p-button>
+        <p-button icon="pi pi-history" (click)="editModalVisible = false" label="Annuler" styleClass="p-button-danger"></p-button>
     </ng-template>
   </p-dialog>
+
+  <!-- Modal pour ajouter un programme -->
+  <p-dialog header="Header" [blockScroll]="true" [(visible)]="addModalVisible" position="center" [closable]="false" >
+    <ng-template pTemplate="header">
+        <span class="text-xl font-bold">Ajouter un programme</span>
+    </ng-template>
+    <div class="edit-stack">
+      <table>
+        <tr>
+          <td><label class="mx-2 block" for="name">Nom du campus</label></td>
+          <td><input  class="mx-2" type="text" id="name" pInputText /></td>
+        </tr>
+        <tr>
+          <td><label class="mx-2 block" for="duration">Ville</label></td>
+          <td><input class="mx-2" type="text" id="ville" pInputText /></td>
+        </tr>
+        <tr>
+          <td><label class="mx-2 block" for="duration">Adresse</label></td>
+          <td><input class="mx-2" type="text" id="address" pInputText /></td>
+        </tr>
+        <tr>
+          <td><label class="mx-2 block" for="duration">Ouverture</label></td>
+          <td><p-inputSwitch [disabled]="true"></p-inputSwitch></td>
+        </tr>
+      </table>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-save" (click)="addModalVisible = false" label="Enregistrer" styleClass="p-button-success"></p-button>
+        <p-button icon="pi pi-history" (click)="addModalVisible = false" label="Annuler" styleClass="p-button-danger"></p-button>
+    </ng-template>
+  </p-dialog>
+

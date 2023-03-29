@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ConfirmationService,
   MessageService,
   ConfirmEventType,
 } from 'primeng/api';
+import { Campus } from 'src/app/models/campus.model';
+import { CampusService } from 'src/app/services/campus.service';
 
 @Component({
   selector: 'app-campus',
@@ -11,75 +13,60 @@ import {
   styleUrls: ['./campus.component.scss'],
   providers: [ConfirmationService, MessageService],
 })
-export class CampusComponent {
+export class CampusComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private campusService: CampusService
   ) {}
 
-  visible!: boolean;
+  addModalVisible!: boolean;
+  editModalVisible!: boolean;
 
   value!: string;
-  products: any[] = [
-    {
-      id: '1000',
-      code: 'f230fh0g3',
-      name: 'Bamboo Watch',
-      description: 'Product Description',
-      image: 'bamboo-watch.jpg',
-      price: 65,
-      category: 'Accessories',
-      quantity: 24,
-      inventoryStatus: 'INSTOCK',
-      rating: 5,
-    },
-    {
-      id: '1001',
-      code: 'f230fhhg3',
-      name: 'Bamboo Watch',
-      description: 'Product Description',
-      image: 'bamboo-watch.jpg',
-      price: 65,
-      category: 'Accessories',
-      quantity: 24,
-      inventoryStatus: 'INSTOCK',
-      rating: 5,
-    },
-  ];
+  campuses!: Campus[];
+  selectedCampus!: Campus;
 
-  showDialog() {
-    this.visible = true;
+  ngOnInit(): void {
+    this.campusService.getAll().subscribe(
+      (data) => {
+        console.log(data);
+        this.campuses = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  confirm1() {
+  showAddDialog() {
+    this.addModalVisible = true;
+  }
+
+  showEditDialog(id: string) {
+    const campus = this.campuses.find((campus) => campus.id === id);
+    if (campus) this.selectedCampus = campus;
+    this.editModalVisible = true;
+  }
+
+  deleteById(id: string) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
+      message: 'Etes vous sure de vouloir supprimer?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Confirmed',
-          detail: 'You have accepted',
+          summary: 'Confirmé',
+          detail: 'Campus supprimé avec success',
         });
       },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Rejected',
-              detail: 'You have rejected',
-            });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({
-              severity: 'warn',
-              summary: 'Cancelled',
-              detail: 'You have cancelled',
-            });
-            break;
-        }
+      reject: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Annulé',
+          detail: 'Vous avez annuler la suppression',
+        });
       },
     });
   }

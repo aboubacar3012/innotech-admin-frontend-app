@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Stack } from './../models/stack.model';
 
-const baseUrl = 'http://localhost:3001/api/stacks';
+const baseUrl = 'https://ariane-backend.vercel.app/api/stacks';
 
 @Injectable({
   providedIn: 'root',
@@ -11,27 +11,27 @@ const baseUrl = 'http://localhost:3001/api/stacks';
 export class StacksService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+  getAll(): Observable<Stack[]> {
+    return this.http.get<Stack[]>(baseUrl);
   }
 
-  get(id: string): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
+  get(id: string): Observable<Stack> {
+    return this.http.get<Stack>(`${baseUrl}/${id}`);
   }
 
-  create(data: Stack): Observable<any> {
-    return this.http.post(baseUrl, data);
+  create(data: Stack): Observable<Stack> {
+    return this.http.post<Stack>(baseUrl, data);
   }
 
-  update(id: string, data: Stack): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  update(id: string, data: Stack): Observable<Stack> {
+    return this.http.put<Stack>(`${baseUrl}/${id}`, data);
   }
 
-  delete(id: string): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+  delete(id: string): Observable<Stack> {
+    return this.http.delete<Stack>(`${baseUrl}/${id}`);
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
+  // deleteAll(): Observable<any> {
+  //   return this.http.delete(baseUrl);
+  // }
 }
