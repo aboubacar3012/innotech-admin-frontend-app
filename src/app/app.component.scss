@@ -1,11 +1,22 @@
 .tab{
   display: flex;
   align-items:center ;
-  font-size: large;
+  font-size: x-large;
   cursor: pointer;
   padding-left: 15px;
+  a{
+    text-decoration: none;
+    color: gainsboro;
+  }
 }
 
 .tab:hover{
   background-color: #46546c;
+}
+.active{
+  background-color: #46546c;
+}
+
+.pi{
+  font-size:large
 }
