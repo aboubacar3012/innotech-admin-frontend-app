@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   ConfirmationService,
   MessageService,
@@ -17,17 +18,34 @@ export class CampusComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private campusService: CampusService
+    private campusService: CampusService,
+    private formBuilder: FormBuilder
   ) {}
 
-  addModalVisible!: boolean;
-  editModalVisible!: boolean;
+  formModalVisible!: boolean;
 
   value!: string;
   campuses!: Campus[];
   selectedCampus!: Campus;
 
+  campusForm!: FormGroup;
+  formType: 'edit' | 'add' = 'add';
+
   ngOnInit(): void {
+    // Initialisation du form
+    if (this.formType === 'add') {
+      this.campusForm = this.formBuilder.group({
+        name: [null, Validators.required],
+        address: [null, Validators.required],
+        city: [null, Validators.required],
+        isOpen: [null, Validators.required],
+      });
+    }
+    // End form
+    this.getAllCampus();
+  }
+
+  getAllCampus() {
     this.campusService.getAll().subscribe(
       (data) => {
         console.log(data);
@@ -39,15 +57,39 @@ export class CampusComponent implements OnInit {
     );
   }
 
-  showAddDialog() {
-    this.addModalVisible = true;
+  showFormDialog(type: 'add' | 'edit', id?: string) {
+    if (type === 'add') {
+      this.formType = 'add';
+      this.campusForm = this.formBuilder.group({
+        name: [null, Validators.required],
+        address: [null, Validators.required],
+        city: [null, Validators.required],
+      });
+    } else if (type === 'edit') {
+      this.formType = 'edit';
+      if (id) {
+        const campus = this.campuses.find((campus) => campus.id === id);
+        if (campus) this.selectedCampus = campus;
+        this.campusForm = this.formBuilder.group({
+          name: [this.selectedCampus.name, Validators.required],
+          address: [this.selectedCampus.address, Validators.required],
+          city: [this.selectedCampus.city, Validators.required],
+          isOpen: [this.selectedCampus.isOpen, Validators.required],
+        });
+      }
+    }
+    this.formModalVisible = true;
   }
 
-  showEditDialog(id: string) {
-    const campus = this.campuses.find((campus) => campus.id === id);
-    if (campus) this.selectedCampus = campus;
-    this.editModalVisible = true;
-  }
+  // showAddDialog() {
+  //   this.addModalVisible = true;
+  // }
+
+  // showEditDialog(id: string) {
+  //   const campus = this.campuses.find((campus) => campus.id === id);
+  //   if (campus) this.selectedCampus = campus;
+  //   this.editModalVisible = true;
+  // }
 
   deleteById(id: string) {
     this.confirmationService.confirm({
@@ -55,10 +97,13 @@ export class CampusComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Confirmé',
-          detail: 'Campus supprimé avec success',
+        this.campusService.delete(id).subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Confirmé',
+            detail: 'Programme supprimé avec success',
+          });
+          this.getAllCampus();
         });
       },
       reject: () => {
@@ -69,5 +114,42 @@ export class CampusComponent implements OnInit {
         });
       },
     });
+  }
+
+  onSubmitStackForm() {
+    const form = this.campusForm.value;
+    const campus = {
+      name: form.name,
+      address: form.address,
+      city: form.city,
+    };
+    if (this.formType === 'add') {
+      this.campusService.create(campus).subscribe((response) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Ajout du programme',
+          detail: 'Le programme a été crée avec success',
+        });
+        this.formModalVisible = false;
+        this.getAllCampus();
+      });
+    } else if (this.formType === 'edit') {
+      if (this.selectedCampus.id) {
+        this.campusService
+          .update(this.selectedCampus.id, {
+            ...campus,
+            updatedAt: new Date().toISOString(),
+          })
+          .subscribe((response) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Ajout du programme',
+              detail: 'Le programme a été crée avec success',
+            });
+            this.formModalVisible = false;
+            this.getAllCampus();
+          });
+      }
+    }
   }
 }

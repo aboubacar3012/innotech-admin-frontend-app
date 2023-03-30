@@ -3,6 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Stack } from './../models/stack.model';
 
+interface addStackDto {
+  name: string;
+  duration: number;
+}
+
+interface updateStackDto {
+  name?: string;
+  duration?: number;
+  updatedAt: string;
+}
+
 const baseUrl = 'https://ariane-backend.vercel.app/api/stacks';
 
 @Injectable({
@@ -19,17 +30,11 @@ export class StacksService {
     return this.http.get<Stack>(`${baseUrl}/${id}`);
   }
 
-  create(data: {
-    name: string;
-    duration: number;
-  }): Observable<{ name: string; duration: string }> {
+  create(data: addStackDto): Observable<addStackDto> {
     return this.http.post<any>(baseUrl, data);
   }
 
-  update(
-    id: string,
-    data: { name: string; duration: number }
-  ): Observable<{ name: string; duration: number }> {
+  update(id: string, data: updateStackDto): Observable<updateStackDto> {
     return this.http.put<Stack>(`${baseUrl}/${id}`, data);
   }
 

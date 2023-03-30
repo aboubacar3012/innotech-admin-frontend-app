@@ -34,31 +34,6 @@
     <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
   </div>
 
-  <!-- Modal pour modifier un programme -->
-  <!-- <p-dialog header="Header" [blockScroll]="true" [(visible)]="editModalVisible" position="center" [closable]="false" *ngIf="selectedStack">
-    <ng-template pTemplate="header">
-        <span class="text-xl font-bold">Modification du programme</span>
-    </ng-template>
-    <div class="edit-stack">
-
-      <form [formGroup]="stackForm">
-        <table>
-          <tr>
-            <td><label class="mx-2 block" for="name">Nom:</label></td>
-            <td><input   class="mx-2" type="text" id="name" pInputText formControlName="name" /></td>
-          </tr>
-          <tr>
-            <td><label class="mx-2 block" for="duration">Duree:</label></td>
-            <td><input  class="mx-2" type="number" id="duration" pInputText formControlName="duration" /></td>
-          </tr>
-        </table>
-       </form>
-    </div>
-    <ng-template pTemplate="footer">
-        <p-button icon="pi pi-save" (click)="stackForm.valid && onSubmitEditStackForm()" label="Enregistrer" styleClass="p-button-success" [disabled]="stackForm.invalid" ></p-button>
-        <p-button icon="pi pi-history" (click)="editModalVisible = false" label="Annuler" styleClass="p-button-danger"></p-button>
-    </ng-template>
-  </p-dialog> -->
 
   <!-- Modal pour ajouter un programme -->
   <p-dialog header="Header" [blockScroll]="true" [(visible)]="formModalVisible" position="center" [closable]="false" >

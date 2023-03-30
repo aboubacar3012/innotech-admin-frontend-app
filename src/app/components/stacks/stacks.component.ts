@@ -41,7 +41,6 @@ export class StacksComponent implements OnInit {
 
   showFormDialog(type: 'add' | 'edit', id?: string) {
     if (type === 'add') {
-      console.log('addType');
       this.formType = 'add';
       this.stackForm = this.formBuilder.group({
         name: [null, Validators.required],
@@ -116,7 +115,7 @@ export class StacksComponent implements OnInit {
     } else if (this.formType === 'edit') {
       if (this.selectedStack.id) {
         this.stackService
-          .update(this.selectedStack.id, stack)
+          .update(this.selectedStack.id, {...stack, updatedAt: new Date().toISOString()})
           .subscribe((response) => {
             this.messageService.add({
               severity: 'success',
