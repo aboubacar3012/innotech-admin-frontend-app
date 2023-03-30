@@ -19,11 +19,17 @@ export class StacksService {
     return this.http.get<Stack>(`${baseUrl}/${id}`);
   }
 
-  create(data: Stack): Observable<Stack> {
-    return this.http.post<Stack>(baseUrl, data);
+  create(data: {
+    name: string;
+    duration: number;
+  }): Observable<{ name: string; duration: string }> {
+    return this.http.post<any>(baseUrl, data);
   }
 
-  update(id: string, data: Stack): Observable<Stack> {
+  update(
+    id: string,
+    data: { name: string; duration: number }
+  ): Observable<{ name: string; duration: number }> {
     return this.http.put<Stack>(`${baseUrl}/${id}`, data);
   }
 
