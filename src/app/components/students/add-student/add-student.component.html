@@ -1,9 +1,67 @@
-<p-fieldset>
-  <ng-template pTemplate="header">
-      <div class="flex align-items-center text-primary">
-          <span class="pi pi-user mr-2"></span>
-          <span class="font-bold text-lg">User Details</span>
+<div class="card">
+  <div class="card my-3 flex justify-content-between">
+    <div class="card flex justify-content-center">
+      <div class="flex flex-column gap-2 w-full">
+          <label htmlFor="firstName">Nom</label>
+          <input class="w-full" pInputText id="firstName" aria-describedby="firstName-help"  />
+          <!-- <small id="firstName-help">Enter your username to reset your password.</small> -->
       </div>
-  </ng-template>
-  Content
-</p-fieldset>
+    </div>
+    <div class="card flex justify-content-center">
+      <div class="flex flex-column gap-2">
+          <label htmlFor="lastName">Prenom</label>
+          <input pInputText id="lastName" aria-describedby="lastName-help"  />
+          <!-- <small id="lastName-help">Enter your username to reset your password.</small> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="card my-3 flex justify-content-between">
+    <div class="card flex justify-content-center">
+      <div class="flex flex-column gap-2 w-full">
+          <label htmlFor="email">E-mail</label>
+          <input type="email" class="w-full" pInputText id="email" aria-describedby="email-help"  />
+          <!-- <small id="email-help">Enter your username to reset your password.</small> -->
+      </div>
+    </div>
+    <div class="card flex justify-content-center">
+      <div class="flex flex-column gap-2">
+          <label htmlFor="tel">Telephone</label>
+          <input type="number" pInputText id="tel" aria-describedby="tel-help"  />
+          <!-- <small id="tel-help">Enter your username to reset your password.</small> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="card my-3 flex justify-content-between">
+    <div class="card flex justify-content-center">
+      <div class="flex flex-column gap-2 w-full">
+          <label htmlFor="gender">Genre</label>
+          <p-selectButton id="gender" aria-describedby="gender-help" [options]="genderOptions"  [multiple]="false" optionLabel="name" optionValue="value"></p-selectButton>
+
+          <!-- <small id="gender-help">Enter your username to reset your password.</small> -->
+      </div>
+    </div>
+    <div class="card flex justify-content-center">
+      <div class="flex flex-column gap-2">
+          <label htmlFor="dateOfBirth">Date de naissance</label>
+          <p-calendar panelStyle="{width:'50%'}" id="dateOfBirth" [touchUI]="true" dateFormat="dd/mm/yy" [readonlyInput]="true"  [showIcon]="true" aria-describedby="dateOfBirth-help" [(ngModel)]="dateOfBirth"></p-calendar>
+          <!-- <small id="dateOfBirth-help">Enter your username to reset your password.</small> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="card my-3 flex justify-content-between">
+    <div class="card flex justify-content-center">
+      <div class="flex flex-column gap-2 w-full">
+          <label htmlFor="avatar">Photo</label>
+          <p-fileUpload mode="basic" name="avatar" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true" chooseLabel="Browse"></p-fileUpload>
+          <!-- <small id="gender-help">Enter your username to reset your password.</small> -->
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-content-center">
+    <p-button label="Enregistrer" icon="pi pi-save" styleClass="p-button-success" ></p-button>
+  </div>
+  <p-toast></p-toast>
+</div>

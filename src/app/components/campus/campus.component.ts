@@ -38,7 +38,7 @@ export class CampusComponent implements OnInit {
         name: [null, Validators.required],
         address: [null, Validators.required],
         city: [null, Validators.required],
-        isOpen: [null, Validators.required],
+        isOpen: [false, Validators.required],
       });
     }
     // End form
@@ -64,6 +64,7 @@ export class CampusComponent implements OnInit {
         name: [null, Validators.required],
         address: [null, Validators.required],
         city: [null, Validators.required],
+        isOpen: [false, Validators.required],
       });
     } else if (type === 'edit') {
       this.formType = 'edit';
@@ -116,12 +117,14 @@ export class CampusComponent implements OnInit {
     });
   }
 
-  onSubmitStackForm() {
+  onSubmitCampusForm() {
     const form = this.campusForm.value;
+    console.log(form.isOpen);
     const campus = {
       name: form.name,
       address: form.address,
       city: form.city,
+      isOpen: form.isOpen,
     };
     if (this.formType === 'add') {
       this.campusService.create(campus).subscribe((response) => {

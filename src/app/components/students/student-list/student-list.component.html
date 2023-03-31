@@ -1,30 +1,63 @@
 <div class="card my-3 flex justify-content-around">
-  <span class="p-input-icon-left">
+  <span class="p-input-icon-left w-full mx-2">
     <i class="pi pi-search"></i>
-    <input placeholder="Rechercher par matricule" class="w-full" type="text" pInputText [(ngModel)]="value" />
+    <input placeholder="Rechercher par matricule" class="w-full"  type="text" pInputText [(ngModel)]="value" />
   </span>
-  <p-button label="Ajouter un étudiant" icon="pi pi-plus" ></p-button>
+  <span class="p-input-icon-left w-full mx-2">
+    <i class="pi pi-search"></i>
+    <input placeholder="Rechercher par nom"  class="w-full" type="text" pInputText [(ngModel)]="value" />
+  </span>
+  <span class="p-input-icon-left w-full mx-2">
+    <i class="pi pi-search"></i>
+    <input placeholder="Rechercher par telephone" class="w-full" type="text" pInputText [(ngModel)]="value" />
+  </span>
+  <p-button label="Chercher" icon="pi pi-search" ></p-button>
 </div>
 
-<div class="card my-3">
-  <p-table [value]="products" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+<div class="card my-3 ">
+  <p-toolbar class="mx-2">
+    <div class="p-toolbar-group-start">
+      <p-button (click)="showAddStudentDialog()" label="Ajouter un étudiant" icon="pi pi-plus" class="m-2"></p-button>
+    </div>
+    <div class="p-toolbar-group-end">
+      <p-button icon="pi pi-list" class="m-2"></p-button>
+      <p-button icon="pi pi-th-large" styleClass="p-button-text p-button-raised" class="m-2"></p-button>
+      <p-button label="Télécharger" icon="pi pi-download"  class="m-2"></p-button>
+    </div>
+  </p-toolbar>
+
+  <p-table [value]="users" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
       <ng-template pTemplate="header">
           <tr>
               <th>Matricule</th>
               <th>Photo</th>
               <th>Nom complet</th>
+              <th>E-mail</th>
               <th>Date de naissance</th>
               <th></th>
           </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-product>
+      <ng-template pTemplate="body" let-user>
           <tr>
-              <td>{{product.code}}</td>
-              <td>{{product.name}}</td>
-              <td>{{product.category}}</td>
-              <td>{{product.quantity}}</td>
-              <td><p-button icon="pi pi-eye" styleClass="p-button-warning"></p-button></td>
+              <td>{{user.id}}</td>
+              <td>
+                <p-image src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" alt="Image" width="150" [preview]="true"></p-image>
+               </td>
+              <td>{{user.firstName}} {{user.lastName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.dateOfBirth}}</td>
+              <td>
+                <p-button icon="pi pi-eye" styleClass="p-button-text p-button-raised" class="m-2"></p-button>
+                <p-button icon="pi pi-pencil" styleClass="p-button-text p-button-raised" class="m-2"></p-button>
+              </td>
           </tr>
       </ng-template>
   </p-table>
+
+
+<div class="card flex justify-content-center">
+  <p-dialog header="Inscription" [(visible)]="addStudentDialog" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+      <app-add-student></app-add-student>
+  </p-dialog>
+</div>
 </div>

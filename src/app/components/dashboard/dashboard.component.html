@@ -1,1 +1,54 @@
-<p>dashboard works!</p>
+<div class="m-5">
+  <!-- Statistiques -->
+  <div class="grid gap-5 justify-content-center">
+    <div class="col-12 md:col-6 lg:col-3 border-round-lg bg-white flex justify-content-between align-items-center p-3">
+        <div>
+          <h3 class="m-0">Etudiants</h3>
+          <h4 class="m-0">50000</h4>
+        </div>
+        <p-image src="../../../assets/student.png" alt="Image" width="80"></p-image>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3 border-round-lg bg-white flex justify-content-between align-items-center p-3">
+      <div>
+        <h3 class="m-0">Professeurs</h3>
+        <h4 class="m-0">8</h4>
+      </div>
+      <p-image src="../../../assets/teacher.png" alt="Image" width="80"></p-image>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3 border-round-lg bg-white flex justify-content-between align-items-center p-3">
+      <div>
+        <h3 class="m-0">Programmes</h3>
+        <h4 class="m-0">15</h4>
+      </div>
+      <p-image src="../../../assets/stack.png" alt="Image" width="80"></p-image>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3 border-round-lg bg-white flex justify-content-between align-items-center p-3">
+      <div>
+        <h3 class="m-0">Groupes</h3>
+        <h4 class="m-0">150</h4>
+      </div>
+      <p-image src="../../../assets/batch.png" alt="Image" width="80"></p-image>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3 border-round-lg bg-white flex justify-content-between align-items-center p-3">
+      <div>
+        <h3 class="m-0">Campus</h3>
+        <h4 class="m-0">3</h4>
+      </div>
+      <p-image src="../../../assets/school.png" alt="Image" width="80"></p-image>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3 border-round-lg bg-white flex justify-content-between align-items-center p-3">
+      <div>
+        <h3 class="m-0">Chiffre d'affaire 2023</h3>
+        <h4 class="m-0">50 000 000 GNF</h4>
+      </div>
+      <p-image src="../../../assets/money.png" alt="Image" width="80"></p-image>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+  <br/>
+  <div class="card">
+    <p-chart type="bar" [data]="data" [options]="options"></p-chart>
+  </div>
+</div>

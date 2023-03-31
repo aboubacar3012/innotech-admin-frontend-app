@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 
-const baseUrl = 'http://localhost:3001/api/users';
+const baseUrl = 'https://ariane-backend.vercel.app/api/users';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentsService {
+export class UsersService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(baseUrl);
   }
 
   get(id: string): Observable<any> {

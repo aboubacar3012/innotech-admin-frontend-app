@@ -19,7 +19,7 @@
         <ng-template pTemplate="body" let-stack>
             <tr>
                 <td>{{stack.name}}</td>
-                <td>{{stack.duration}}</td>
+                <td>{{stack.duration}} Semaines</td>
                 <td>
                   <p-button icon="pi pi-pencil" styleClass="p-button-success mx-1" (click)="showFormDialog('edit', stack.id)"></p-button>
                   <p-button icon="pi pi-trash" styleClass="p-button-danger mx-1" (click)="deleteById(stack.id)"></p-button>
@@ -36,7 +36,7 @@
 
 
   <!-- Modal pour ajouter un programme -->
-  <p-dialog header="Header" [blockScroll]="true" [(visible)]="formModalVisible" position="center" [closable]="false" >
+  <p-dialog header="Header" [blockScroll]="true" [(visible)]="formModalVisible" [modal]="true"  position="center" [closable]="false" >
     <ng-template pTemplate="header">
         <span class="text-xl font-bold">Ajouter un programme</span>
     </ng-template>

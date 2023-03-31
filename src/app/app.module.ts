@@ -28,6 +28,12 @@ import { AddStudentComponent } from './components/students/add-student/add-stude
 import { StudentDetailsComponent } from './components/students/student-details/student-details.component';
 import { StudentListComponent } from './components/students/student-list/student-list.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ImageModule } from 'primeng/image';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CalendarModule } from 'primeng/calendar';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ChartModule } from 'primeng/chart';
+import { BlockUIModule } from 'primeng/blockui';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +66,12 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     ConfirmDialogModule,
     ToastModule,
     InputSwitchModule,
+    ImageModule,
+    SelectButtonModule,
+    CalendarModule,
+    FileUploadModule,
+    ChartModule,
+    BlockUIModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
