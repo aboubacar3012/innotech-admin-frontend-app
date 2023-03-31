@@ -20,24 +20,18 @@
             "outputPath": "dist/ariane-admin-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeflex/primeflex.css",
-              "node_modules/chart.js/dist/chart.js"
+              "node_modules/primeflex/primeflex.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/chart/dist/chart.js"]
           },
           "configurations": {
             "production": {
